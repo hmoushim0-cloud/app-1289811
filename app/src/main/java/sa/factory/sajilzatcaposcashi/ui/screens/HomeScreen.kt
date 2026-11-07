@@ -27,6 +27,8 @@ fun HomeScreen(
     onItemClick: (SajilZatcaItem) -> Unit
 ) {
     val categories = listOf("الكل", "الخدمات الرئيسية", "المراقبة الحية", "التقارير الضريبية", "الإعدادات")
+    val defaultPeripheral = "ESC/POS Thermal Receipt Printer + Barcode Scanner"
+    val activePeripheralName = state.telemetry?.peripheralName ?: defaultPeripheral
 
     Column(
         modifier = Modifier
@@ -36,7 +38,7 @@ fun HomeScreen(
     ) {
         // Header
         Column {
-            Text("تطبيق سجل زاتكا — إنشاء متجر إلكتروني — انشاء", fontSize = 22.sp, fontWeight = FontWeight.Black, color = BrandTextPrimary)
+            Text("تطبيق سجل زاتكا - نقطة بيع إلكترونية معتمدة", fontSize = 22.sp, fontWeight = FontWeight.Black, color = BrandTextPrimary)
             Text("منظومة pos_cashier المتكاملة مع ربط ESC/POS Thermal Receipt Printer + Barcode Scanner", fontSize = 12.sp, color = BrandTextSecondary)
         }
 
@@ -52,7 +54,7 @@ fun HomeScreen(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Column(modifier = Modifier.weight(1f)) {
-                    Text("العتاد الحي: ${state.telemetry?.peripheralName ?: 'ESC/POS Thermal Receipt Printer + Barcode Scanner'}", fontWeight = FontWeight.Bold, color = BrandPrimary, fontSize = 13.sp)
+                    Text("العتاد الحي: $activePeripheralName", fontWeight = FontWeight.Bold, color = BrandPrimary, fontSize = 13.sp)
                     Text(state.telemetry?.liveReading ?: "ESC/POS Thermal Receipt Printer + Barcode Scanner: ONLINE | READY", fontSize = 11.sp, color = BrandTextSecondary)
                 }
                 Badge(containerColor = BrandPrimary) {
